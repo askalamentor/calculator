@@ -1,0 +1,172 @@
+:root {
+    --grey: rgb(26, 33, 51);
+    --white: antiquewhite;
+    --light-grey: rgb(83, 90, 105);
+    --hover-grey: rgb(129, 134, 145);
+    --button-red: rgb(107, 31, 31);
+    --button-yellow:rgb(139, 139, 28);
+    --button-green: rgb(30, 100, 30);
+    --equalButton-green: rgb(93, 170, 93);
+}
+
+*, html {
+    font-family: 'Bahianita', cursive;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--grey);
+}
+
+/*-------------------------- header style ------------------------*/
+
+#headerContainer {
+    height: 10%;
+}
+
+/*--------------------------- main style -------------------------*/
+
+#mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    background-color: black;
+}
+
+#calculatorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    width: 400px;
+    border-radius: 10px;
+}
+
+/* result container styles*/
+
+#resultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 30%;
+    width: 100%;
+}
+
+.subResultContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 318px;
+    height: 35%;
+    color: var(--white);
+    background-color: white;
+}
+
+#calculationHistory {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#currentEntry {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* button styles */
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 70%;
+    width: 100%;
+}
+
+.button {
+    font-size: 28px;
+    width: 75px;
+    height: 50px;
+    border-radius: 10px;
+    color: var(--white);
+    background-color: var(--light-grey);
+    margin: auto 3px;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    background-color: var(--hover-grey);
+}
+
+.buttonNumber:hover {
+    background-color: var(--button-green);
+}
+
+.buttonOperator:hover {
+    background-color: var(--button-yellow);
+}
+
+.buttonClear:hover {
+    background-color: var(--button-red);
+}
+
+.button:active {
+    transform: translateY(0px);
+}
+
+#equalButton {
+    width: 156px;
+}
+
+#equalButton:hover {
+    background-color: var(--equalButton-green);
+}
+
+/* ------------------------ footer style ----------------------*/
+
+#footerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    background-color: var(--grey);
+}
+
+#footerText {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--white);
+    margin: auto 8px;
+}
+
+#footerContainer > a {
+    display: flex;
+    align-items: center;
+}
+
+#githubImage {
+    height: 28px;
+    width: 28px;
+    border-radius: 25px;
+    margin: auto 8px;
+}
+
+#githubImage:hover {
+    animation: rotate-animation 0.5s ease-out;
+}
+
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
