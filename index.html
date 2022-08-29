@@ -20,46 +20,67 @@
         <main class="mainContainer" id="mainContainer">
             <div class="calculatorContainer" id="calculatorContainer">
                 <div class="resultContainer" id="resultContainer">
-                    <p class="subResultContainer" id="calculationHistory">
+                    <p class="subResultContainer" 
+                    id="calculationHistory" value="0">
                         0
                     </p>
-                    <p class="subResultContainer" id="currentEntry">
+                    <p class="subResultContainer" 
+                    id="currentEntry" value="">
 
                     </p>
                 </div>
                 <div class="buttonContainer" id="buttonContainer">
                     <div class="buttonRowGroup" id="buttonRowGroup1">
-                        <button type="button" class="button buttonClear">AC</button>
-                        <button type="button" class="button buttonClear">C</button>
-                        <button type="button" class="button buttonOperator">%</button>
-                        <button type="button" class="button buttonOperator">÷</button>
+                        <button type="button" class="button buttonClear" 
+                        id="buttonAC">AC</button>
+                        <button type="button" class="button buttonClear"
+                        id="buttonC">C</button>
+                        <button type="button" class="button buttonOperator"
+                        id="buttonDecimal">%</button>
+                        <button type="button" class="button buttonOperator"
+                        id="buttonDivider">÷</button>
                     </div>
 
                     <div class="buttonRowGroup" id="buttonRowGroup2">
-                        <button type="button" class="button buttonNumber">7</button>
-                        <button type="button" class="button buttonNumber">8</button>
-                        <button type="button" class="button buttonNumber">9</button>
-                        <button type="button" class="button buttonOperator">x</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonSeven" value="7">7</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonEight" value="8">8</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonNine" value="9">9</button>
+                        <button type="button" class="button buttonOperator"
+                        id="buttonMultiplication">x</button>
                     </div>
 
                     <div class="buttonRowGroup" id="buttonRowGroup3">
-                        <button type="button" class="button buttonNumber">4</button>
-                        <button type="button" class="button buttonNumber">5</button>
-                        <button type="button" class="button buttonNumber">6</button>
-                        <button type="button" class="button buttonOperator">-</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonFour" value="4">4</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonFive" value="5">5</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonSix" value="6">6</button>
+                        <button type="button" class="button buttonOperator"
+                        id="buttonSubstration">-</button>
                     </div>
 
                     <div class="buttonRowGroup" id="buttonRowGroup4">
-                        <button type="button" class="button buttonNumber">1</button>
-                        <button type="button" class="button buttonNumber">2</button>
-                        <button type="button" class="button buttonNumber">3</button>
-                        <button type="button" class="button buttonOperator">+</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonOne" value="1">1</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonTwo" value="2">2</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonThree" value="3">3</button>
+                        <button type="button" class="button buttonOperator"
+                        id="buttonAddition">+</button>
                     </div>
 
                     <div class="buttonRowGroup" id="buttonRowGroup5">
-                        <button type="button" class="button">.</button>
-                        <button type="button" class="button buttonNumber">0</button>
-                        <button type="button" class="button" id="equalButton">=</button>
+                        <button type="button" class="button" 
+                        id="buttonDecimalPoint">.</button>
+                        <button type="button" class="button buttonNumber"
+                        id="buttonZero" value="0">0</button>
+                        <button type="button" class="button" 
+                        id="buttonEqual">=</button>
                     </div>
                 </div>
             </div>

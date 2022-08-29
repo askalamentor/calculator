@@ -1,6 +1,8 @@
 :root {
-    --grey: rgb(26, 33, 51);
     --white: antiquewhite;
+    --black: rgb(28, 30, 44);
+    --grey: rgb(46, 49, 58);
+    --resulScreen-grey: rgb(163, 162, 162);
     --light-grey: rgb(83, 90, 105);
     --hover-grey: rgb(129, 134, 145);
     --button-red: rgb(107, 31, 31);
@@ -30,7 +32,7 @@
     justify-content: center;
     align-items: center;
     height: 80%;
-    background-color: black;
+    background-color: var(--black)
 }
 
 #calculatorContainer {
@@ -61,8 +63,10 @@
     align-items: center;
     width: 318px;
     height: 35%;
-    color: var(--white);
-    background-color: white;
+    font-size: 30px;
+    padding-right: 10px;
+    color: var(--black);
+    background-color: var(--resulScreen-grey);
 }
 
 #calculationHistory {
@@ -118,11 +122,11 @@
     transform: translateY(0px);
 }
 
-#equalButton {
+#buttonEqual {
     width: 156px;
 }
 
-#equalButton:hover {
+#buttonEqual:hover {
     background-color: var(--equalButton-green);
 }
 
