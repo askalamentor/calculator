@@ -1,15 +1,60 @@
 // result screen and buttons object
-const result = document.querySelectorAll(".subResultContainer");
-const buttons = document.querySelectorAll(".button");
-console.log(buttons);
+const calculationHistory = document.querySelector("#calculationHistory");
+const currentEntry = document.querySelector("#currentEntry");
+const numberButtons = document.querySelectorAll(".buttonNumber");
+const operatorButtons = document.querySelectorAll(".buttonOperator")
 
-// buttons event listener
-buttons.forEach((numberButton) => {
-    button.addEventListener("click", () => {
-        result[0].innerHTML += numberButton.value;
-        result[1].innerHTML += numberButton.value;
+let numberArr = [];
+let isNumber = false;
+
+// buttons event listeners
+numberButtons.forEach((numberButton) => {
+    numberButton.addEventListener("click", () => {
+        
+        // check if it is after operator
+        if (!(currentEntry.innerHTML === "")) {
+            resetCurrentEntry(numberButton);
+        }
+      
+        isNumber = true;
+
+        calculationHistory.innerHTML += numberButton.value;
+        currentEntry.innerHTML += numberButton.value;
+
     })
 })
+
+operatorButtons.forEach((operatorButton) => {
+    operatorButton.addEventListener("click", () => {
+
+        isNumber = false;
+        calculationHistory.innerHTML += " " + operatorButton.value + " ";
+        addNumbertoArr();
+        resetCurrentEntry(operatorButton);
+        currentEntry.innerHTML = operatorButton.value;
+
+    })
+})
+
+function addNumbertoArr() {
+
+    numberArr.push(parseInt(currentEntry.innerHTML));
+    console.log(numberArr);
+}
+
+function calculateProcess(formerNumber, currentNumber, operator) {
+
+}
+
+function resetCurrentEntry(button) {
+    
+    if (!isNumber) {
+        currentEntry.innerHTML = "";
+    }
+
+
+}
+
 
 
 
