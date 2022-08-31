@@ -5,6 +5,7 @@ const numberButtons = document.querySelectorAll(".buttonNumber");
 const operatorButtons = document.querySelectorAll(".buttonOperator");
 const equalityButton = document.querySelector("#buttonEqual");
 const clearButton = document.querySelector("#buttonC");
+const clearAllButton = document.querySelector("#buttonAC");
 
 let numberArr = [];
 let calculationProcessTabArr = [];
@@ -91,6 +92,7 @@ operatorButtons.forEach((operatorButton) => {
 })
 
 clearButton.addEventListener("click", clearLastNumber);
+clearAllButton.addEventListener("click",clearAllNumber);
 
 // functions
 function resetCurrentEntry() {
@@ -119,7 +121,15 @@ function clearLastNumber() {
 
     resultTab.innerHTML = resultTab.innerHTML.substring(0, resultTab.innerHTML.length - 1);
     calculationProcessTab.innerHTML = calculationProcessTab.innerHTML.substring(0, calculationProcessTab.innerHTML.length - 1);
+
+}
+
+function clearAllNumber() {
     
+    resultTab.innerHTML = "0";
+    calculationProcessTab.innerHTML = "";
+    calculationProcessTabArr = [];
+
 }
 
 function calculateProcess(operator) {
