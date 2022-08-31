@@ -22,11 +22,14 @@ numberButtons.forEach((numberButton) => {
       
         isNumber = true;
 
-        calculationProcessTab.innerHTML += numberButton.value;
-        resultTab.innerHTML += numberButton.value;
+        // do not let "01, 02..."
+        if (resultTab.innerHTML != "0") {
+            calculationProcessTab.innerHTML += numberButton.value;
+            resultTab.innerHTML += numberButton.value;
+        }  
+            
     })
 })
-
 
 operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener("click", () => {
@@ -81,6 +84,7 @@ operatorButtons.forEach((operatorButton) => {
             }
      
             addNumbertoCalculationProcessTabArr();
+            console.log(calculationProcessTabArr)
 
     })
 })
