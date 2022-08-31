@@ -3,7 +3,8 @@ const calculationProcessTab = document.querySelector("#calculationProcessTab");
 const resultTab = document.querySelector("#resultTab");
 const numberButtons = document.querySelectorAll(".buttonNumber");
 const operatorButtons = document.querySelectorAll(".buttonOperator");
-const equalityButton = document.querySelector("#buttonEqual")
+const equalityButton = document.querySelector("#buttonEqual");
+const clearButton = document.querySelector("#buttonC");
 
 let numberArr = [];
 let calculationProcessTabArr = [];
@@ -27,7 +28,7 @@ numberButtons.forEach((numberButton) => {
             calculationProcessTab.innerHTML += numberButton.value;
             resultTab.innerHTML += numberButton.value;
         }  
-            
+
     })
 })
 
@@ -89,7 +90,9 @@ operatorButtons.forEach((operatorButton) => {
     })
 })
 
+clearButton.addEventListener("click", clearLastNumber);
 
+// functions
 function resetCurrentEntry() {
     
     if (!isNumber) {
@@ -110,6 +113,13 @@ function checkLastElement(string) {
         return true;
     }
 
+}
+
+function clearLastNumber() {
+
+    resultTab.innerHTML = resultTab.innerHTML.substring(0, resultTab.innerHTML.length - 1);
+    calculationProcessTab.innerHTML = calculationProcessTab.innerHTML.substring(0, calculationProcessTab.innerHTML.length - 1);
+    
 }
 
 function calculateProcess(operator) {
