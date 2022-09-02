@@ -125,7 +125,7 @@ function resetCurrentEntry() {
 
 function checkLastElement(string) {
 
-    if ((string == '+') || (string == '-') || (string == '*') || (string == '/')) {
+    if ((string == '+') || (string == '-') || (string == '*') || (string == '/') || (string == '%')) {
         return true;
     }
 
@@ -166,6 +166,8 @@ function performCalculationProcess() {
             currentNumberTab.innerHTML = firstNumber / secondNumber;
         } else if (operator === "*") {
             currentNumberTab.innerHTML = firstNumber * secondNumber;
+        } else if (operator === "%") {
+            currentNumberTab.innerHTML = firstNumber % secondNumber;
         }
 
         calculationProcessTab.innerHTML = currentNumberTab.innerHTML + " ";
