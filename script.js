@@ -6,6 +6,7 @@ const operatorButtons = document.querySelectorAll(".buttonOperator");
 const equalityButton = document.querySelector("#buttonEqual");
 const clearButton = document.querySelector("#buttonC");
 const clearAllButton = document.querySelector("#buttonAC");
+const decimalPointButton = document.querySelector("#buttonDecimalPoint");
 
 // global variables
 let calculationProcessTabArr = [];
@@ -17,9 +18,10 @@ numberButtons.forEach((numberButton) => {
     numberButton.addEventListener("click", () => {
 
         // check if it is after operator or initial entry
-        if (!(currentNumberTab.innerHTML === "")) {
+        // check also if it's 0.,, float point
+        if (!(currentNumberTab.innerHTML === "") && (currentNumberTab.innerHTML != "0.")) {
             resetCurrentEntry();
-        }
+        } 
 
         isNumber = true; // turn on number
 
@@ -112,6 +114,7 @@ equalityButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", clearLastNumber);
 clearAllButton.addEventListener("click", clearAllNumber);
+decimalPointButton.addEventListener("click", addDecimalPoint);
 
 // -----------------------------------------------------------------------------------
 // functions
@@ -154,8 +157,8 @@ function performCalculationProcess() {
     // check if number exists in entry tab
     if (currentNumberTab.innerHTML != "") {
 
-        let firstNumber = parseInt(calculationProcessTabArr[0]);
-        let secondNumber = parseInt(currentNumberTab.innerHTML);
+        let firstNumber = parseFloat(calculationProcessTabArr[0]);
+        let secondNumber = parseFloat(currentNumberTab.innerHTML);
         let operator = calculationProcessTabArr[1];
 
         if (operator === "+") {
@@ -182,5 +185,16 @@ function performCalculationProcess() {
     resetCurrentEntry();
 
 }
+
+function addDecimalPoint() {
+
+    // do no let using decimal point more than once
+    if (!(currentNumberTab.innerHTML.includes('.'))) {
+        currentNumberTab.innerHTML = `${currentNumberTab.innerHTML}.`;
+    }
+    
+}
+
+
 
 
