@@ -175,7 +175,7 @@ function performCalculationProcess() {
 
         calculationProcessTab.innerHTML = deleteTrailingZeros(currentNumberTab.innerHTML) + " ";
         calculationProcessTabArr = [];
-        calculationProcessTabArr.push(currentNumberTab.innerHTML);
+        calculationProcessTabArr.push(deleteTrailingZeros(currentNumberTab.innerHTML));
 
         console.log(calculationProcessTabArr);
 
@@ -188,18 +188,24 @@ function performCalculationProcess() {
 
 function addDecimalPoint() {
 
+    // if there is no number entry
+    if (currentNumberTab.innerHTML === "") {
+        currentNumberTab.innerHTML = "0.";
+    }
+
     // do no let using decimal point more than once
     if (!(currentNumberTab.innerHTML.includes('.'))) {
         currentNumberTab.innerHTML = `${currentNumberTab.innerHTML}.`;
     }
-    
+  
 }
 
 function deleteTrailingZeros(number) {
 
     let temp = parseFloat(number);
 
-    while (temp % 10 === 0) {
+    // do not let to delete zeros before dot! (temp > parseInt(number))
+    while ((temp % 10 === 0) && (temp > parseInt(number))) {
         temp /= 10;
     }
 
@@ -207,11 +213,6 @@ function deleteTrailingZeros(number) {
 
 }
 
-// ondalık sonrası 3-4 rakam
 // 0'a bölme
 // tuş ekleme
-// currententry boşken . girmek
-
-
-
-
+// trailing zero . solundakini de siliyor
