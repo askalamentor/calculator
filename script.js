@@ -162,18 +162,18 @@ function performCalculationProcess() {
         let operator = calculationProcessTabArr[1];
 
         if (operator === "+") {
-            currentNumberTab.innerHTML = firstNumber + secondNumber;
+            currentNumberTab.innerHTML = (firstNumber + secondNumber). toFixed(3);
         } else if (operator === "-") {
-            currentNumberTab.innerHTML = firstNumber - secondNumber;
+            currentNumberTab.innerHTML = (firstNumber - secondNumber). toFixed(3);
         } else if (operator === "/") {
-            currentNumberTab.innerHTML = firstNumber / secondNumber;
+            currentNumberTab.innerHTML = (firstNumber / secondNumber). toFixed(3);
         } else if (operator === "*") {
-            currentNumberTab.innerHTML = firstNumber * secondNumber;
+            currentNumberTab.innerHTML = (firstNumber * secondNumber). toFixed(3);
         } else if (operator === "%") {
-            currentNumberTab.innerHTML = firstNumber % secondNumber;
+            currentNumberTab.innerHTML = (firstNumber % secondNumber). toFixed(3);
         }
 
-        calculationProcessTab.innerHTML = currentNumberTab.innerHTML + " ";
+        calculationProcessTab.innerHTML = deleteTrailingZeros(currentNumberTab.innerHTML) + " ";
         calculationProcessTabArr = [];
         calculationProcessTabArr.push(currentNumberTab.innerHTML);
 
@@ -194,6 +194,23 @@ function addDecimalPoint() {
     }
     
 }
+
+function deleteTrailingZeros(number) {
+
+    let temp = parseFloat(number);
+
+    while (temp % 10 === 0) {
+        temp /= 10;
+    }
+
+    return temp;
+
+}
+
+// ondalık sonrası 3-4 rakam
+// 0'a bölme
+// tuş ekleme
+// currententry boşken . girmek
 
 
 
