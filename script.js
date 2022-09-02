@@ -1,34 +1,32 @@
 // result screen and buttons object
 const calculationProcessTab = document.querySelector("#calculationProcessTab");
-const resultTab = document.querySelector("#resultTab");
+const currentNumberTab = document.querySelector("#currentNumberTab");
 const numberButtons = document.querySelectorAll(".buttonNumber");
 const operatorButtons = document.querySelectorAll(".buttonOperator");
 const equalityButton = document.querySelector("#buttonEqual");
 const clearButton = document.querySelector("#buttonC");
 const clearAllButton = document.querySelector("#buttonAC");
 
-let numberArr = [];
+// global variables
 let calculationProcessTabArr = [];
-let currentOperator = "";
 let isNumber = false;
 
+// -----------------------------------------------------------------------------------
 // buttons event listeners
-
 numberButtons.forEach((numberButton) => {
     numberButton.addEventListener("click", () => {
-        
-        // check if it is after operator
-        if (!(resultTab.innerHTML === "")) {
+
+        // check if it is after operator or initial entry
+        if (!(currentNumberTab.innerHTML === "")) {
             resetCurrentEntry();
         }
-      
-        isNumber = true;
+
+        isNumber = true; // turn on number
 
         // do not let "01, 02..."
-        if (resultTab.innerHTML != "0") {
-            calculationProcessTab.innerHTML += numberButton.value;
-            resultTab.innerHTML += numberButton.value;
-        }  
+        if (currentNumberTab.innerHTML != "0") {
+            currentNumberTab.innerHTML += numberButton.value;
+        }
 
     })
 })
@@ -36,76 +34,92 @@ numberButtons.forEach((numberButton) => {
 operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener("click", () => {
 
-            isNumber = false; // turn on operator process     
-            currentOperator = operatorButton.value;
+        isNumber = false; // turn on operator process     
 
-            if (calculationProcessTabArr.length > 0) {
+        // after first calculation
+        if (calculationProcessTabArr.length > 0) {
 
-                let arrayLastElement = calculationProcessTabArr.slice(-1); // last operator
+            let isLastElementOperator = calculationProcessTabArr.slice(-1);
 
-                // prevent to add more than one operators in a row
-                if (checkLastElement(arrayLastElement) && (resultTab.innerHTML == "")) {
-                    
-                    // edit array
-                    calculationProcessTabArr.pop();
-                    calculationProcessTabArr.push(currentOperator);
-                    
-                    // edit tabs
-                    calculationProcessTab.innerHTML = calculationProcessTab.innerHTML.substring(0, calculationProcessTab.innerHTML.length - 1);
-                    calculationProcessTab.innerHTML += currentOperator;
-                    resultTab.innerHTML = "";
+            // prevent to add more than one operator in a row
+            if (checkLastElement(isLastElementOperator) && (currentNumberTab.innerHTML == "")) {
 
-                // perform usual calculation order
-                } else if (checkLastElement(arrayLastElement) && !(resultTab.innerHTML == "")) {
-                
-                    // edit array
-                    calculationProcessTabArr.push(resultTab.innerHTML);
-                    calculationProcessTabArr.push(currentOperator);
+                // edit array
+                calculationProcessTabArr.pop();
+                calculationProcessTabArr.push(operatorButton.value);
 
-                    // edit tabs
-                    calculationProcessTab.innerHTML += currentOperator;
-                    resultTab.innerHTML = "";
-                }
+                // edit tabs
+                calculationProcessTab.innerHTML = "";
+                calculationProcessTab.innerHTML += calculationProcessTabArr[0] + " " + operatorButton.value + " ";
+                currentNumberTab.innerHTML = "";
+
+
+
+            }
+            // perform usual calculation order
+            else if (checkLastElement(isLastElementOperator) && !(currentNumberTab.innerHTML == "")) {
+
+                performCalculationProcess();
+
+                calculationProcessTabArr.push(operatorButton.value);
+                calculationProcessTab.innerHTML += operatorButton.value + " ";
+
+            }
+            // perform calculation while numbers are available in tabs without operator
+            else if (!checkLastElement(isLastElementOperator) && !(currentNumberTab.innerHTML == "")) {
+
+                // edit array
+                calculationProcessTabArr.push(operatorButton.value);
+
+                performCalculationProcess();
+
+            }
+            // continue to calculation after using equality button
+            else if (!checkLastElement(isLastElementOperator) && (currentNumberTab.innerHTML == "")) {
+
+                calculationProcessTabArr.push(operatorButton.value);
+                calculationProcessTab.innerHTML += operatorButton.value + " ";
+
+            }
 
             // the first calculation
-            } else {
+        } else {
 
-                // number + operator
-                if (resultTab.innerHTML != "") {
-                    calculationProcessTabArr.push(resultTab.innerHTML);
-                }
-                calculationProcessTabArr.push(currentOperator);
+            // edit array
+            calculationProcessTabArr.push(currentNumberTab.innerHTML);
+            calculationProcessTabArr.push(operatorButton.value);
 
-                // 0 + operator
-                if (calculationProcessTab.innerHTML == "") {
-                    calculationProcessTab.innerHTML += resultTab.innerHTML;
-                }     
-                calculationProcessTab.innerHTML += currentOperator;
+            // edit tabs
+            calculationProcessTab.innerHTML += currentNumberTab.innerHTML + " " + operatorButton.value + " ";
+            currentNumberTab.innerHTML = "";
 
-                resultTab.innerHTML = "";
-            }
-     
-            addNumbertoCalculationProcessTabArr();
-            console.log(calculationProcessTabArr)
+        }
+
+        console.log(calculationProcessTabArr)
 
     })
 })
 
-clearButton.addEventListener("click", clearLastNumber);
-clearAllButton.addEventListener("click",clearAllNumber);
+equalityButton.addEventListener("click", () => {
 
-// functions
-function resetCurrentEntry() {
-    
-    if (!isNumber) {
-        resultTab.innerHTML = "";
+    isNumber = false; // turn on operator process 
+
+    if (calculationProcessTabArr.length > 0) {
+        performCalculationProcess();
     }
 
-}
+});
 
-function addNumbertoCalculationProcessTabArr() {
+clearButton.addEventListener("click", clearLastNumber);
+clearAllButton.addEventListener("click", clearAllNumber);
 
-    numberArr.push(parseInt(resultTab.innerHTML));
+// -----------------------------------------------------------------------------------
+// functions
+function resetCurrentEntry() {
+
+    if (!isNumber) {
+        currentNumberTab.innerHTML = "";
+    }
 
 }
 
@@ -119,33 +133,51 @@ function checkLastElement(string) {
 
 function clearLastNumber() {
 
-    resultTab.innerHTML = resultTab.innerHTML.substring(0, resultTab.innerHTML.length - 1);
-    calculationProcessTab.innerHTML = calculationProcessTab.innerHTML.substring(0, calculationProcessTab.innerHTML.length - 1);
+    currentNumberTab.innerHTML = currentNumberTab.innerHTML.substring(0, currentNumberTab.innerHTML.length - 1);
+
+    if (currentNumberTab.innerHTML == "") {
+        currentNumberTab.innerHTML = "0";
+    }
 
 }
 
 function clearAllNumber() {
-    
-    resultTab.innerHTML = "0";
+
+    currentNumberTab.innerHTML = "0";
     calculationProcessTab.innerHTML = "";
     calculationProcessTabArr = [];
 
 }
 
-function calculateProcess(operator) {
-    
-    let formerNumber = numberArr[(numberArr.length) - 1];
-    let currentNumber = numberArr[(numberArr.length) - 2];
+function performCalculationProcess() {
 
-    if (operator === "+") {
-        resultTab.innerHTML = formerNumber + currentNumber;
-    } else if (operator === "-") {
-        resultTab.innerHTML = formerNumber - currentNumber;
-    } else if (operator === "/") {
-        resultTab.innerHTML = formerNumber / currentNumber;
-    } else if (operator === "*") {
-        resultTab.innerHTML = formerNumber * currentNumber;
+    // check if number exists in entry tab
+    if (currentNumberTab.innerHTML != "") {
+
+        let firstNumber = parseInt(calculationProcessTabArr[0]);
+        let secondNumber = parseInt(currentNumberTab.innerHTML);
+        let operator = calculationProcessTabArr[1];
+
+        if (operator === "+") {
+            currentNumberTab.innerHTML = firstNumber + secondNumber;
+        } else if (operator === "-") {
+            currentNumberTab.innerHTML = firstNumber - secondNumber;
+        } else if (operator === "/") {
+            currentNumberTab.innerHTML = firstNumber / secondNumber;
+        } else if (operator === "*") {
+            currentNumberTab.innerHTML = firstNumber * secondNumber;
+        }
+
+        calculationProcessTab.innerHTML = currentNumberTab.innerHTML + " ";
+        calculationProcessTabArr = [];
+        calculationProcessTabArr.push(currentNumberTab.innerHTML);
+
+        console.log(calculationProcessTabArr);
+
     }
+
+    // clear currentNumberTab after calculation
+    resetCurrentEntry();
 
 }
 
