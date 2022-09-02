@@ -160,23 +160,34 @@ function performCalculationProcess() {
         let firstNumber = parseFloat(calculationProcessTabArr[0]);
         let secondNumber = parseFloat(currentNumberTab.innerHTML);
         let operator = calculationProcessTabArr[1];
+        let isDivideByZero = false;
 
         if (operator === "+") {
             currentNumberTab.innerHTML = (firstNumber + secondNumber). toFixed(3);
         } else if (operator === "-") {
             currentNumberTab.innerHTML = (firstNumber - secondNumber). toFixed(3);
         } else if (operator === "/") {
-            currentNumberTab.innerHTML = (firstNumber / secondNumber). toFixed(3);
+
+            // do not let to divide by zero
+            if (secondNumber === 0) {
+                alert("You can't divide by zero!");
+                isDivideByZero = true;
+            } else {
+                currentNumberTab.innerHTML = (firstNumber / secondNumber). toFixed(3);
+            }
+            
         } else if (operator === "*") {
             currentNumberTab.innerHTML = (firstNumber * secondNumber). toFixed(3);
         } else if (operator === "%") {
             currentNumberTab.innerHTML = (firstNumber % secondNumber). toFixed(3);
         }
 
-        calculationProcessTab.innerHTML = deleteTrailingZeros(currentNumberTab.innerHTML) + " ";
-        calculationProcessTabArr = [];
-        calculationProcessTabArr.push(deleteTrailingZeros(currentNumberTab.innerHTML));
-
+        if (!isDivideByZero) {
+            calculationProcessTab.innerHTML = deleteTrailingZeros(currentNumberTab.innerHTML) + " ";
+            calculationProcessTabArr = [];
+            calculationProcessTabArr.push(deleteTrailingZeros(currentNumberTab.innerHTML));
+        }
+        
         console.log(calculationProcessTabArr);
 
     }
@@ -215,4 +226,4 @@ function deleteTrailingZeros(number) {
 
 // 0'a bölme
 // tuş ekleme
-// trailing zero . solundakini de siliyor
+// 0 % engelle
